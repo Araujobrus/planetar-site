@@ -69,19 +69,11 @@
             border-radius: 5px;
             font-weight: 600;
             transition: transform 0.3s, background-color 0.3s;
-            cursor: pointer;
-            border: none;
         }
 
         .btn:hover {
             background-color: #e67e00;
             transform: translateY(-3px);
-        }
-        
-        .btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
         }
 
         /* --- Header e Navegação --- */
@@ -94,120 +86,353 @@
             transition: background-color 0.4s, box-shadow 0.4s;
         }
         
+        /* Estilo do header no topo da página */
         .header.top {
             background-color: transparent;
             box-shadow: none;
         }
         
+        /* Estilo do header ao rolar a página */
         .header.scrolled {
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .header.top .nav-link { color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .header.top .nav-logo { color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .header.top .nav-logo i { color: white; }
-        .header.top .nav-toggle { color: white; }
+        .header.top .nav-link {
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .header.top .nav-logo {
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .header.top .nav-logo i {
+            color: white;
+        }
+        
+        .header.top .nav-toggle {
+            color: white;
+        }
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .nav-logo { font-size: 1.5rem; font-weight: 700; color: var(--cor-principal); text-decoration: none; transition: color 0.4s; }
-        .nav-logo i { color: var(--cor-secundaria); transition: color 0.4s; }
-        .nav-menu { list-style: none; display: flex; gap: 25px; } /* Reduzido o gap */
-        .nav-link { text-decoration: none; color: var(--cor-texto); font-weight: 600; transition: color 0.3s; }
-        .nav-link:hover { color: var(--cor-destaque); }
-        .nav-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--cor-principal); }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-principal);
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+        
+        .nav-logo i {
+            color: var(--cor-secundaria);
+            transition: color 0.4s;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--cor-destaque);
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--cor-principal);
+        }
 
         /* --- Animações de Scroll --- */
-        [data-animate] { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        [data-animate].in-view { opacity: 1; transform: translateY(0); }
+        [data-animate] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        [data-animate].in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* --- Seção Início (Hero) --- */
-        #inicio { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0, 90, 156, 0.7), rgba(0, 90, 156, 0.7)), url('https://images.unsplash.com/photo-1617933622489-32865c317f20?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; color: white; }
-        .inicio-content h1 { font-size: 3.5rem; margin-bottom: 20px; color: white; }
-        .inicio-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; }
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 90, 156, 0.7), rgba(0, 90, 156, 0.7)), url('https://images.unsplash.com/photo-1617933622489-32865c317f20?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            color: white;
+        }
+
+        .inicio-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .inicio-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
 
         /* --- Seção Serviços --- */
-        #servicos { background-color: var(--cor-fundo-secao); }
-        .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; text-align: center; }
-        .servico-card { background-color: white; padding: 40px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .servico-card .icon { font-size: 3rem; color: var(--cor-secundaria); margin-bottom: 20px; }
-        .servico-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-
-        /* --- Estilos Comuns para Seções de IA --- */
-        .ia-wrapper { max-width: 800px; margin: 0 auto; background-color: var(--cor-fundo-secao); padding: 40px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .ia-actions { text-align: center; }
-        .resultado-box { margin-top: 30px; padding: 20px; border-radius: 5px; background-color: #e7f3fe; border-left: 5px solid var(--cor-principal); text-align: left; font-size: 1rem; line-height: 1.7; display: none; }
-        .resultado-box p, .resultado-box ul { margin: 0; }
-        .resultado-box ul { padding-left: 20px; margin-top: 10px; }
-        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; margin-left: 10px; vertical-align: middle; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- Seção Calculadora IA --- */
-        #calculadora-ia { background-color: white; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Poppins', sans-serif; }
-        #resultado-calculadora { text-align: center; font-size: 1.1rem; line-height: 1.6; }
-
-        /* --- Seção Diagnóstico IA --- */
-        #diagnostico-ia { background-color: var(--cor-fundo-secao); }
-        #problema-descricao { width: 100%; min-height: 100px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Poppins', sans-serif; margin-bottom: 20px; }
+        #servicos {
+            background-color: var(--cor-fundo-secao);
+        }
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .servico-card {
+            background-color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
 
         /* --- Seção Números --- */
-        #numeros { background-color: var(--cor-principal); color: white; }
-        #numeros h2 { color: white; }
-        .numeros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
-        .numero-card .icon { font-size: 2.5rem; margin-bottom: 15px; }
-        .numero-card .counter { font-size: 3rem; font-weight: 700; }
-        .numero-card p { font-size: 1rem; font-weight: 400; }
+        #numeros {
+            background-color: var(--cor-principal);
+            color: white;
+        }
+        #numeros h2 {
+            color: white;
+        }
+        .numeros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .numero-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .numero-card .counter {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .numero-card p {
+            font-size: 1rem;
+            font-weight: 400;
+        }
 
         /* --- Seção Sobre --- */
-        #sobre { background-color: white; }
-        .sobre-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
-        .sobre-imagem img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .sobre-content h3 { font-size: 1.8rem; margin-bottom: 20px; }
-        .sobre-content p { line-height: 1.7; margin-bottom: 15px; }
-        .sobre-content ul { list-style: none; margin-top: 20px; }
-        .sobre-content li { margin-bottom: 10px; font-weight: 600; }
-        .sobre-content li i { color: var(--cor-destaque); margin-right: 10px; }
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .sobre-imagem img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .sobre-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .sobre-content p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .sobre-content ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .sobre-content li {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .sobre-content li i {
+            color: var(--cor-destaque);
+            margin-right: 10px;
+        }
 
         /* --- Seção Depoimentos --- */
-        #depoimentos { background-color: var(--cor-fundo-secao); }
-        .depoimentos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .depoimento-card { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
-        .depoimento-texto { font-style: italic; margin-bottom: 20px; flex-grow: 1; }
-        .depoimento-texto::before { content: '“'; font-size: 3rem; color: var(--cor-secundaria); font-weight: 700; line-height: 0; display: block; }
-        .depoimento-autor { display: flex; align-items: center; }
-        .depoimento-autor img { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; object-fit: cover; }
-        .autor-nome { font-weight: 700; }
-        .autor-cidade { font-size: 0.9rem; color: #777; }
+        #depoimentos {
+            background-color: var(--cor-fundo-secao);
+        }
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .depoimento-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+        .depoimento-texto {
+            font-style: italic;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .depoimento-texto::before {
+            content: '“';
+            font-size: 3rem;
+            color: var(--cor-secundaria);
+            font-weight: 700;
+            line-height: 0;
+            display: block;
+        }
+        .depoimento-autor {
+            display: flex;
+            align-items: center;
+        }
+        .depoimento-autor img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .autor-nome {
+            font-weight: 700;
+        }
+        .autor-cidade {
+            font-size: 0.9rem;
+            color: #777;
+        }
 
         /* --- Seção Contato --- */
-        #contato { background-color: white; }
-        .contato-wrapper { max-width: 800px; margin: 0 auto; text-align: center; }
-        .contato-wrapper p { margin-bottom: 40px; font-size: 1.1rem; }
-        .contato-info { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .info-item { font-size: 1.2rem; font-weight: 600; }
-        .info-item i { color: var(--cor-principal); margin-right: 10px; }
-        .info-item a { text-decoration: none; color: var(--cor-texto); transition: color 0.3s; }
-        .info-item a:hover { color: var(--cor-destaque); }
+        #contato {
+            background-color: white;
+        }
+
+        .contato-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contato-wrapper p {
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .contato-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .info-item i {
+            color: var(--cor-principal);
+            margin-right: 10px;
+        }
+        
+        .info-item a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            transition: color 0.3s;
+        }
+
+        .info-item a:hover {
+            color: var(--cor-destaque);
+        }
         
         /* --- Footer --- */
-        .footer { background-color: var(--cor-principal); color: white; text-align: center; padding: 20px 0; }
-        .footer p { font-size: 0.9rem; }
+        .footer {
+            background-color: var(--cor-principal);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .footer p {
+            font-size: 0.9rem;
+        }
 
         /* --- Responsividade --- */
         @media (max-width: 768px) {
-            h2 { font-size: 2rem; }
-            .nav-menu { position: fixed; top: 70px; right: -100%; width: 100%; height: calc(100vh - 70px); background-color: white; flex-direction: column; justify-content: center; align-items: center; transition: right 0.4s ease-in-out; }
-            .header.top .nav-menu { background-color: rgba(255, 255, 255, 0.95); }
-            .header.top .nav-menu .nav-link { color: var(--cor-texto); text-shadow: none; }
-            .nav-menu.active { right: 0; }
-            .nav-toggle { display: block; }
-            #inicio h1 { font-size: 2.5rem; }
-            .sobre-grid { grid-template-columns: 1fr; text-align: center; }
-            .sobre-imagem { margin-bottom: 40px; }
+            h2 {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease-in-out;
+            }
+            
+            .header.top .nav-menu {
+                background-color: rgba(255, 255, 255, 0.95);
+            }
+            
+            .header.top .nav-menu .nav-link {
+                color: var(--cor-texto);
+                text-shadow: none;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+            
+            #inicio h1 {
+                font-size: 2.5rem;
+            }
+            
+            .sobre-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .sobre-imagem {
+                margin-bottom: 40px;
+            }
         }
     </style>
 </head>
@@ -221,11 +446,10 @@
             </a>
             
             <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Início</a></li>
                 <li><a href="#servicos" class="nav-link">Serviços</a></li>
-                <li><a href="#calculadora-ia" class="nav-link">Calculadora</a></li>
-                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
                 <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
-                <li><a href="#diagnostico-ia" class="nav-link">Diagnóstico</a></li>
                 <li><a href="#contato" class="nav-link">Contato</a></li>
             </ul>
 
@@ -265,45 +489,6 @@
                         <h3>Manutenção Corretiva</h3>
                         <p>Seu ar condicionado parou de funcionar? Nossa equipe de especialistas resolve o problema de forma rápida e eficiente, restaurando seu conforto.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== CALCULADORA IA (GEMINI) ==================== -->
-        <section id="calculadora-ia">
-            <div class="container">
-                <h2 data-animate>Não Sabe Qual Ar Condicionado Escolher?</h2>
-                <div class="ia-wrapper" data-animate>
-                    <p style="text-align: center; margin-bottom: 30px;">Use nossa calculadora inteligente para descobrir a potência (BTUs) ideal para seu ambiente. Preencha os campos abaixo e deixe nossa IA ajudar você!</p>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="area">Área do cômodo (m²)</label>
-                            <input type="number" id="area" placeholder="Ex: 15">
-                        </div>
-                        <div class="form-group">
-                            <label for="pessoas">Número de pessoas</label>
-                            <input type="number" id="pessoas" placeholder="Ex: 2">
-                        </div>
-                        <div class="form-group">
-                            <label for="eletronicos">Nº de aparelhos eletrônicos</label>
-                            <input type="number" id="eletronicos" placeholder="Ex: 1">
-                        </div>
-                        <div class="form-group">
-                            <label for="sol">Incidência de sol</label>
-                            <select id="sol">
-                                <option value="da manhã">Sol da manhã</option>
-                                <option value="da tarde">Sol da tarde</option>
-                                <option value="o dia todo">O dia todo</option>
-                                <option value="nenhuma">Sem sol direto</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="ia-actions">
-                        <button class="btn" id="calcular-btn">
-                            ✨ Calcular BTUs com IA
-                        </button>
-                    </div>
-                    <div id="resultado-calculadora" class="resultado-box"></div>
                 </div>
             </div>
         </section>
@@ -394,23 +579,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== DIAGNÓSTICO IA (GEMINI) ==================== -->
-        <section id="diagnostico-ia">
-            <div class="container">
-                <h2 data-animate>Seu Ar Condicionado Apresentou um Problema?</h2>
-                <div class="ia-wrapper" data-animate>
-                    <p style="text-align: center; margin-bottom: 30px;">Descreva o que está acontecendo com seu aparelho e nossa IA fornecerá um diagnóstico rápido com possíveis causas e soluções.</p>
-                    <textarea id="problema-descricao" placeholder="Ex: Meu ar condicionado está pingando água para dentro do quarto e não está gelando como antes..."></textarea>
-                    <div class="ia-actions">
-                        <button class="btn" id="diagnosticar-btn">
-                            ✨ Diagnosticar Problema com IA
-                        </button>
-                    </div>
-                    <div id="resultado-diagnostico" class="resultado-box"></div>
                 </div>
             </div>
         </section>
@@ -521,99 +689,6 @@
             const numerosSection = document.getElementById('numeros');
             if (numerosSection) counterObserver.observe(numerosSection);
 
-            // --- FUNÇÃO GENÉRICA PARA CHAMADA DA API GEMINI VIA NETLIFY FUNCTIONS ---
-            async function callGemini(prompt, buttonElement, resultElement) {
-                buttonElement.disabled = true;
-                const originalButtonText = buttonElement.innerHTML;
-                buttonElement.innerHTML = 'Analisando... <span class="loading-spinner"></span>';
-                resultElement.style.display = 'none';
-
-                try {
-                    const apiUrl = `/.netlify/functions/gemini`;
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt: prompt })
-                    });
-
-                    // **INÍCIO DA MUDANÇA PARA DEBUG**
-                    if (!response.ok) {
-                        const errorText = await response.text(); // Pega o erro como texto puro
-                        try {
-                            // Tenta analisar como JSON para ver se há uma mensagem de erro estruturada
-                            const errorData = JSON.parse(errorText);
-                            throw new Error(errorData.error || `Erro do Servidor: ${response.statusText}`);
-                        } catch (e) {
-                            // Se falhar, o erro não era JSON. Mostra o texto puro.
-                            throw new Error(errorText || `Erro do Servidor: ${response.statusText} - Resposta vazia.`);
-                        }
-                    }
-                    // **FIM DA MUDANÇA PARA DEBUG**
-
-                    const result = await response.json();
-                    
-                    let text = result.text || "Não foi possível obter uma resposta. Tente novamente.";
-                    
-                    resultElement.style.display = 'block';
-                    resultElement.style.borderColor = 'var(--cor-principal)';
-                    
-                    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                    text = text.replace(/\* (.*?)(?=\n\*|\n\n|$)/g, '<li>$1</li>');
-                    text = text.replace(/<li>/g, '<ul><li>').replace(/<\/li>(?!<ul>)/g, '</li></ul>').replace(/<\/li><\/ul><ul>/g, '</li><li>');
-                    resultElement.innerHTML = `<p>${text}</p>`;
-
-                } catch (error) {
-                    console.error("Error calling Netlify Function:", error);
-                    resultElement.style.display = 'block';
-                    resultElement.style.borderColor = '#ff4d4d';
-                    resultElement.innerHTML = `<p>Ocorreu um erro ao se comunicar com a nossa IA. Por favor, tente novamente mais tarde. (${error.message})</p>`;
-                } finally {
-                    buttonElement.disabled = false;
-                    buttonElement.innerHTML = originalButtonText;
-                }
-            }
-            
-            // --- LÓGICA DA CALCULADORA IA (GEMINI) ---
-            const calcularBtn = document.getElementById('calcular-btn');
-            const resultadoCalculadoraDiv = document.getElementById('resultado-calculadora');
-            
-            calcularBtn.addEventListener('click', () => {
-                const area = document.getElementById('area').value;
-                const pessoas = document.getElementById('pessoas').value;
-                const eletronicos = document.getElementById('eletronicos').value;
-                const sol = document.getElementById('sol').value;
-
-                if (!area || !pessoas || !eletronicos) {
-                    resultadoCalculadoraDiv.style.display = 'block';
-                    resultadoCalculadoraDiv.style.borderColor = '#ff4d4d';
-                    resultadoCalculadoraDiv.innerHTML = '<p>Por favor, preencha todos os campos para continuar.</p>';
-                    return;
-                }
-
-                const prompt = `You are a friendly and helpful HVAC assistant for a Brazilian company called PlanetAr. Your task is to calculate the required air conditioner power in BTUs based on room details provided by a user. Respond ONLY in Portuguese (Brazil). Here are the user's room details: - Room area: ${area} square meters. - Number of people usually in the room: ${pessoas}. - Number of electronic devices (like TVs, computers): ${eletronicos}. - Sun exposure: ${sol}. Use this standard calculation formula: 1. Base BTUs: 600 BTUs per square meter. 2. Add 600 BTUs for each person in the room (the first person is already included in the base calculation, so add for every person after the first). 3. Add 600 BTUs for each electronic device. 4. If sun exposure is "da tarde" or "o dia todo", increase the total BTUs by 10%. After calculating, present the result in a friendly, clear, and concise message. Start with the recommended BTU value, then give a very brief explanation. Example response format: "Para um ambiente com essas características, recomendamos um aparelho de aproximadamente **XXXXX BTUs**. Este cálculo considera o tamanho do cômodo, a quantidade de pessoas, os eletrônicos e a incidência solar para garantir seu máximo conforto." Now, calculate and provide the response for the given user details.`;
-                
-                callGemini(prompt, calcularBtn, resultadoCalculadoraDiv);
-            });
-
-            // --- LÓGICA DO DIAGNÓSTICO IA (GEMINI) ---
-            const diagnosticarBtn = document.getElementById('diagnosticar-btn');
-            const resultadoDiagnosticoDiv = document.getElementById('resultado-diagnostico');
-
-            diagnosticarBtn.addEventListener('click', () => {
-                const descricao = document.getElementById('problema-descricao').value;
-
-                if (!descricao.trim()) {
-                    resultadoDiagnosticoDiv.style.display = 'block';
-                    resultadoDiagnosticoDiv.style.borderColor = '#ff4d4d';
-                    resultadoDiagnosticoDiv.innerHTML = '<p>Por favor, descreva o problema para que nossa IA possa ajudar.</p>';
-                    return;
-                }
-
-                const prompt = `You are an expert HVAC diagnostic assistant for a Brazilian company called PlanetAr. A user has described a problem with their air conditioner. Your task is to provide a preliminary diagnosis. Respond ONLY in Portuguese (Brazil). The user's problem is: "${descricao}" Your response should be structured as follows: 1. Start with a reassuring sentence. 2. Provide a numbered list of 2-3 **possible causes**, ordered from most to least likely. 3. For each cause, briefly explain it and suggest a simple action the user can take (like checking something) OR clearly state that a professional technician is needed. 4. End with a strong recommendation to contact PlanetAr for a professional evaluation if the problem persists. 5. Use a friendly, helpful, and professional tone. Use markdown for bolding and lists. Example response structure: "Olá! Entendo a sua preocupação com o seu ar condicionado. Com base na sua descrição, aqui estão algumas possíveis causas: * **Causa Provável 1:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer]. * **Causa Provável 2:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer]. **Importante:** Este é um diagnóstico preliminar. Para uma análise precisa e segura, o ideal é agendar uma visita técnica. **Entre em contato com a PlanetAr** para resolvermos seu problema definitivamente." Now, provide the diagnosis for the user's problem.`;
-
-                callGemini(prompt, diagnosticarBtn, resultadoDiagnosticoDiv);
-            });
         });
     </script>
 
