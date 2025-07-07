@@ -529,19 +529,27 @@
                 resultElement.style.display = 'none';
 
                 try {
-                    // O URL agora aponta para a nossa função Netlify
                     const apiUrl = `/.netlify/functions/gemini`;
 
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt: prompt }) // Enviamos o prompt no corpo da requisição
+                        body: JSON.stringify({ prompt: prompt })
                     });
 
+                    // **INÍCIO DA MUDANÇA PARA DEBUG**
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error || `API Error: ${response.statusText}`);
+                        const errorText = await response.text(); // Pega o erro como texto puro
+                        try {
+                            // Tenta analisar como JSON para ver se há uma mensagem de erro estruturada
+                            const errorData = JSON.parse(errorText);
+                            throw new Error(errorData.error || `Erro do Servidor: ${response.statusText}`);
+                        } catch (e) {
+                            // Se falhar, o erro não era JSON. Mostra o texto puro.
+                            throw new Error(errorText || `Erro do Servidor: ${response.statusText} - Resposta vazia.`);
+                        }
                     }
+                    // **FIM DA MUDANÇA PARA DEBUG**
 
                     const result = await response.json();
                     
