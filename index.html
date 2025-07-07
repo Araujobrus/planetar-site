@@ -521,54 +521,46 @@
             const numerosSection = document.getElementById('numeros');
             if (numerosSection) counterObserver.observe(numerosSection);
 
-            // --- FUNÇÃO GENÉRICA PARA CHAMADA DA API GEMINI ---
+            // --- FUNÇÃO GENÉRICA PARA CHAMADA DA API GEMINI VIA NETLIFY FUNCTIONS ---
             async function callGemini(prompt, buttonElement, resultElement) {
-                // Desabilitar botão e mostrar loading
                 buttonElement.disabled = true;
                 const originalButtonText = buttonElement.innerHTML;
                 buttonElement.innerHTML = 'Analisando... <span class="loading-spinner"></span>';
                 resultElement.style.display = 'none';
 
                 try {
-                    let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                    const payload = { contents: chatHistory };
-                    const apiKey = ""; // API Key is handled by the environment
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    // O URL agora aponta para a nossa função Netlify
+                    const apiUrl = `/.netlify/functions/gemini`;
 
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({ prompt: prompt }) // Enviamos o prompt no corpo da requisição
                     });
 
                     if (!response.ok) {
-                        throw new Error(`API Error: ${response.statusText}`);
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || `API Error: ${response.statusText}`);
                     }
 
                     const result = await response.json();
                     
-                    let text = "Não foi possível obter uma resposta. Tente novamente.";
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        text = result.candidates[0].content.parts[0].text;
-                    }
+                    let text = result.text || "Não foi possível obter uma resposta. Tente novamente.";
                     
                     resultElement.style.display = 'block';
                     resultElement.style.borderColor = 'var(--cor-principal)';
-                    // Substitui markdown bold por <strong> e listas por <ul><li>
+                    
                     text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                     text = text.replace(/\* (.*?)(?=\n\*|\n\n|$)/g, '<li>$1</li>');
                     text = text.replace(/<li>/g, '<ul><li>').replace(/<\/li>(?!<ul>)/g, '</li></ul>').replace(/<\/li><\/ul><ul>/g, '</li><li>');
                     resultElement.innerHTML = `<p>${text}</p>`;
 
                 } catch (error) {
-                    console.error("Error calling Gemini API:", error);
+                    console.error("Error calling Netlify Function:", error);
                     resultElement.style.display = 'block';
                     resultElement.style.borderColor = '#ff4d4d';
-                    resultElement.innerHTML = '<p>Ocorreu um erro ao se comunicar com a nossa IA. Por favor, tente novamente mais tarde.</p>';
+                    resultElement.innerHTML = `<p>Ocorreu um erro ao se comunicar com a nossa IA. Por favor, tente novamente mais tarde. (${error.message})</p>`;
                 } finally {
-                    // Habilitar botão e remover loading
                     buttonElement.disabled = false;
                     buttonElement.innerHTML = originalButtonText;
                 }
@@ -610,26 +602,7 @@
                     return;
                 }
 
-                const prompt = `You are an expert HVAC diagnostic assistant for a Brazilian company called PlanetAr. A user has described a problem with their air conditioner. Your task is to provide a preliminary diagnosis. Respond ONLY in Portuguese (Brazil).
-
-                The user's problem is: "${descricao}"
-
-                Your response should be structured as follows:
-                1.  Start with a reassuring sentence.
-                2.  Provide a numbered list of 2-3 **possible causes**, ordered from most to least likely.
-                3.  For each cause, briefly explain it and suggest a simple action the user can take (like checking something) OR clearly state that a professional technician is needed.
-                4.  End with a strong recommendation to contact PlanetAr for a professional evaluation if the problem persists.
-                5.  Use a friendly, helpful, and professional tone. Use markdown for bolding and lists.
-
-                Example response structure:
-                "Olá! Entendo a sua preocupação com o seu ar condicionado. Com base na sua descrição, aqui estão algumas possíveis causas:
-
-                * **Causa Provável 1:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer].
-                * **Causa Provável 2:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer].
-
-                **Importante:** Este é um diagnóstico preliminar. Para uma análise precisa e segura, o ideal é agendar uma visita técnica. **Entre em contato com a PlanetAr** para resolvermos seu problema definitivamente."
-
-                Now, provide the diagnosis for the user's problem.`;
+                const prompt = `You are an expert HVAC diagnostic assistant for a Brazilian company called PlanetAr. A user has described a problem with their air conditioner. Your task is to provide a preliminary diagnosis. Respond ONLY in Portuguese (Brazil). The user's problem is: "${descricao}" Your response should be structured as follows: 1. Start with a reassuring sentence. 2. Provide a numbered list of 2-3 **possible causes**, ordered from most to least likely. 3. For each cause, briefly explain it and suggest a simple action the user can take (like checking something) OR clearly state that a professional technician is needed. 4. End with a strong recommendation to contact PlanetAr for a professional evaluation if the problem persists. 5. Use a friendly, helpful, and professional tone. Use markdown for bolding and lists. Example response structure: "Olá! Entendo a sua preocupação com o seu ar condicionado. Com base na sua descrição, aqui estão algumas possíveis causas: * **Causa Provável 1:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer]. * **Causa Provável 2:** [Explicação da causa]. **Ação Sugerida:** [O que o usuário pode fazer]. **Importante:** Este é um diagnóstico preliminar. Para uma análise precisa e segura, o ideal é agendar uma visita técnica. **Entre em contato com a PlanetAr** para resolvermos seu problema definitivamente." Now, provide the diagnosis for the user's problem.`;
 
                 callGemini(prompt, diagnosticarBtn, resultadoDiagnosticoDiv);
             });
